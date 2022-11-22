@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Portfolio website, all about Web Development">
+    <meta name="author" content="Thierno Amadou Mouctar Balde, Full-stack Web Developer">
+    <meta name="keywords" content="Web Development, JavaScript, Laravel, Python, Django">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static  'img/faviconi.png'%}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header">
+        <a href="{%url 'home'%}" class="logo">
+            <img src="{% static "img/favicon.webp" %}" alt="mouctechy">
+        </a>
+        <nav class="nav">
+            <ul class="menu">
+                <li>
+                    <a href="tel:+254758375665" class="menu__link" aria-label="phone">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="1em" 
+                            height="1em" 
+                            preserveAspectRatio="xMidYMid meet" 
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19.95 21q-3.225 0-6.287-1.438q-3.063-1.437-5.425-3.8q-2.363-2.362-3.8-5.425Q3 7.275 3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.012.637q-.063.288-.288.513L7 10.9q1.05 1.8 2.625 3.375T13.1 17l2.35-2.35q.225-.225.588-.338q.362-.112.712-.062l3.45.7q.35.075.575.337q.225.263.225.613v4.05q0 .45-.3.75t-.75.3Z"/>
+                        </svg>
+                        <span>Call me</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:mklecodeur@gmail.com" class="menu__link" aria-label="email">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="1em" 
+                            height="1em" 
+                            preserveAspectRatio="xMidYMid meet" 
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V8l6.94 4.34c.65.41 1.47.41 2.12 0L20 8v9c0 .55-.45 1-1 1zm-7-7L4 6h16l-8 5z"/>
+                        </svg>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                <li>
+                    <button aria-label="none" class="menuBtn btn" class="menu__link" onclick="openNav()">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="1em" 
+                            height="1em" 
+                            preserveAspectRatio="xMidYMid meet" 
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"/>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+            <ul class="mobile-menu" id="sideNav" onclick="closeNav()">
+                <li><span class="closeBtn">&times;</span></li>
+                <li class="mobile-menu-link"><a href="{%url 'home'%}">Home</a></li>
+                <li class="mobile-menu-link"><a href="{%url 'home'%}#projects">Projects</a></li>
+                <li class="mobile-menu-link"><a href="{%url 'home'%}#about">About</a></li>
+                <li class="mobile-menu-link"><a href="{%url 'home'%}#skills">Skills</a></li>
+                <li class="mobile-menu-link"><a href="{%url 'home'%}#services">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+    {% block content %}
+        <!-- Banner About me -->
+        <section id="home" class="section about">
+            {% for about in abouts %}        
+                <div class="container">
+                    <div class="title">
+                        <h1>{{ about.heading |safe }}</h1>
+                    </div>
+                    <div class="banner">
+                        <img src="{{ about.photo.url }}" alt="Thierno Amadou Mouctar Balde">
+                        <div class="description">
+                            <span>{{ about.description|safe }}</span> 
+                        </div>
+                        <div class="social">
+                            <a href="https://twitter.com/MouctarDaka" target="_blank" aria-label="twitter" class="twitter">
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="1em" 
+                                    height="1em" 
+                                    preserveAspectRatio="xMidYMid meet" 
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/MUK94" target="_blank" aria-label="github" class="github">
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="1em" 
+                                    height="1em" 
+                                    preserveAspectRatio="xMidYMid meet" 
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/thierno-amadou-mouctar-balde-595578155/" target="_blank" aria-label="linkedIn" class="linkedin">
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="1em" 
+                                    height="1em" 
+                                    preserveAspectRatio="xMidYMid meet" 
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="area" >
+                <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div >
+        </section>
+        
+        <section id="projects" class="section project">
+            <h2>Top Projects</h2>
+            <div class="container">
+                {% for project in projects %}
+                    <div class="card-project">
+                        <img src="{{ project.image.url }}" alt="{{project.title}}">
+                        <div class="stack">
+                            <span>{{ project.stack }}</span>
+                        </div>
+                        <a href="{{ project.get_absolute_url }}" class="title">
+                            <h3>{{project.title}}</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                width="1em" 
+                                height="1em" 
+                                preserveAspectRatio="xMidYMid meet" 
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"/>
+                            </svg>
+                        </a>
+                        <p class="body">
+                            {{ project.body|truncatechars:200}}
+                        </p>
+                        <div class="links">
+                            <a href="{{ project.github }}" target="_blank">Github</a>
+                            <a href="{{ project.demo }}" target="_blank">Demo</a>
+                        </div>
+                    </div>  
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Slider About-->
+        <section id="about" class="myself section">
+            <div class="section__title section__title--me">
+                <h2 class="section__description">Who is Mouctar ?</h2>
+            </div>
+            <div class="slider">
+                {% for slider in sliders %}               
+                    <div class="slide">
+                        <div class="me">
+                        <h3 class="me__header">{{ slider.heading }}</h3>
+                        <blockquote class="me__text">
+                            {{ slider.body }}
+                        </blockquote>
+                        <address class="me__author">
+                            <img src="{{ slider.profile.url }}" alt="" class="me__photo" />
+                            <h6 class="me__name">{{ slider.fullName }}</h6>
+                            <p class="me__location">{{ slider.address }}</p>
+                        </address>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                <!-- silder  buttons and dots -->
+                <button aria-label="none" class="slider__btn slider__btn--left">&larr;</button>
+                <button aria-label="none" class="slider__btn slider__btn--right">&rarr;</button>
+                
+                <div class="dots"></div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <ul class="title">
+                    <li>
+                        <button aria-label="none" id="experience" class="active" >
+                            <h3>Experience with</h3>
+                        </button>
+                    </li>
+                    <li>
+                        <button aria-label="none" id="learning">
+                            <h3>Still Learning</h3>
+                        </button>
+                    </li>
+                </ul>
+                <!-- Experience With -->
+                <div class="boxSkill" id="">
+                    {% for skill in skills %}
+                        <div class="description">
+                            <img src="{{ skill.logo.url }}" alt="{{ skill.description }}">
+                            <span>{{ skill.description }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Still Learning -->
+                <div class="hidden">
+                    {% for learning in learnings %}
+                        <div class="description">
+                            <img src="{{ learning.skill_logo.url }}" alt="{{ learning.skill_name }}">
+                            <span>{{ learning.skill_name }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services -->
+        <section id="services" class="section services">
+            <h2>Services</h2>
+            <div class="service-container">
+                {% for service in services %}
+                    <div class="card">
+                        <div class="face face1">
+                            <div class="content">
+                                <h4 class="name">{{ service.title }}</h4>
+                                <p class="name">
+                                    {{ service.description|safe }}
+                                </p>
+
+                            </div>
+                          </div>
+                          <div class="face face2">
+                            <h5>{{ service.title }}</h5>
+                            <img src="{{service.image.url}}" alt="{{ service.title }}">
+                          </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="contact-btn">
+                <a href="mailto:mklecodeur@gmail.com" class="menu__link" aria-label="email">Get a Quote</a>
+            </div>
+        </section>
+
+        {% endblock  %}
+    </main>
+    
+   
+    <!-- Footer -->
+    <footer class="section footer">
+        <div class="container">
+            <div class="col-1">
+                <h5>Find me</h5>
+                <ul>
+                    <li class="footer__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="1em" 
+                            height="1em" 
+                            preserveAspectRatio="xMidYMid meet" 
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 12q.825 0 1.413-.588Q14 10.825 14 10t-.587-1.413Q12.825 8 12 8q-.825 0-1.412.587Q10 9.175 10 10q0 .825.588 1.412Q11.175 12 12 12Zm0 7.35q3.05-2.8 4.525-5.088Q18 11.975 18 10.2q0-2.725-1.738-4.463Q14.525 4 12 4Q9.475 4 7.737 5.737Q6 7.475 6 10.2q0 1.775 1.475 4.062Q8.95 16.55 12 19.35Zm0 2.275q-.2 0-.4-.075t-.35-.2Q7.6 18.125 5.8 15.363Q4 12.6 4 10.2q0-3.75 2.413-5.975Q8.825 2 12 2t5.587 2.225Q20 6.45 20 10.2q0 2.4-1.8 5.163q-1.8 2.762-5.45 5.987q-.15.125-.35.2q-.2.075-.4.075ZM12 10.2Z"/>
+                        </svg>
+                        <address>
+                            <span>GN, Conakry</span>
+                            <span>Ratoma</span>
+                        </address>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-1">
+                <h5>Connect with me</h5>
+                <ul>
+                    <li class="footer__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            width="1em" 
+                            height="1em" 
+                            preserveAspectRatio="xMidYMid meet" 
+                            viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/>
+                        </svg>
+                        <a href="https://www.linkedin.com/in/thierno-amadou-mouctar-balde-595578155/" target="_blank" class="linkedIn">
+                            <span>Linkedin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-1">
+                <h5>My Channel</h5>
+                <ul>
+                    <li class="footer__item">
+                        <div class="g-ytsubscribe" data-channelid="UCTJqEvE24klETyG6631IUSw" data-layout="default" data-count="default"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <small>© 2021 - 2022 Thierno Amadou Mouctar Balde, All rights reserved</small>
+        </div>
+
+    </footer>
+    <!-- JavaScript -->
+
+    <script src="{% static 'js/index.js'%}"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+</body>
+</html>

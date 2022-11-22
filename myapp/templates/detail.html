@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% block title %} Projects - {{title}}{% endblock  %} 
+    <section class="detail">
+        <p class="bar">
+            <a href="{%url 'home'%}#projects">Home</a> &#62; <span>{{ project.title }}</span>
+        </p>
+        <div class="project__detail">
+            <h1>{{ project.title }}</h1>
+            <div class="stack">
+                <span><strong>Stack: </strong>{{ project.stack }}</span>
+                <span class="date"><strong>Last Update: </strong> {{ project.updated|date:'M d, Y'}}</span>
+            </div>
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" width="250px">
+            <article>
+                {{project.body|safe}}
+            </article>
+            <div class="links">
+                <a href="{{ project.github }}" target="_blank">Github</a>
+                <a href="{{ project.demo }}" target="_blank">Demo</a>
+            </div>
+        </div>
+    </section>   
+{% endblock  %}
