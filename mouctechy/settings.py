@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'mouctechy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'moucdb',
+        'NAME': 'DBname',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '',
