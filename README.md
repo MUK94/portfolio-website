@@ -2,9 +2,11 @@
 It has some cool features of JavaScript DOM manipulations
 Such as a slider and other eventlistener functionalities
 
-# Update the database credentials in the settings.py file
+Update the database credentials in the settings.py file
 
-# Install the required modules from the requirements.txt file
+Install the required modules from the requirements.txt file
 
-# Create and run migrations
+Create and run migrations
 It should be running! enjoy👨‍💻!
+
+# This is a project I built for trying Django 
